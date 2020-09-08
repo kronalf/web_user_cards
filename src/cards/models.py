@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Department(models.Model):
-    name = models.CharField(max_length=200, verbose_name="Наименование отдела/цеха")
+    name = models.CharField(max_length=200, unique=True, verbose_name="Наименование отдела/цеха")
 
     class Meta:
         verbose_name = "Отдел"
@@ -13,7 +13,7 @@ class Department(models.Model):
        return self.name
 
 class Floor(models.Model):
-    number = models.CharField(max_length=10, verbose_name="Номер этажа")
+    number = models.CharField(max_length=10, unique=True, verbose_name="Номер этажа")
 
     class Meta:
         verbose_name = "Этаж"
