@@ -52,5 +52,10 @@ def pswd_generate():
         pswd += random.choice(chars)
     return pswd
 
-def login_generate(full_name: str):
-    pass
+def login_generate(first_name: str, last_name: str, other_name: str):
+    login = from_cyrillic_to_eng(first_name).lower() + '_' + from_cyrillic_to_eng(last_name)[0:1].lower()
+    if other_name:
+        login += from_cyrillic_to_eng(other_name)[0:1].lower()
+    else:
+        login += 'x'
+    return login
