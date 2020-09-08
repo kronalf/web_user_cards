@@ -13,7 +13,7 @@ class Department(models.Model):
        return self.name
 
 class Floor(models.Model):
-    number = models.IntegerField(verbose_name="Номер этажа")
+    number = models.CharField(max_length=10, verbose_name="Номер этажа")
 
     class Meta:
         verbose_name = "Этаж"
@@ -33,7 +33,7 @@ class Person(models.Model):
     password = models.CharField(max_length=16, verbose_name="Пароль")
     email = models.EmailField(verbose_name="Почтовый адрес")
     floor = models.ForeignKey('Floor', on_delete=models.CASCADE, verbose_name="ID Этажа размещения")
-    number_room = models.IntegerField(verbose_name="Номер кабинета")
+    number_room = models.CharField(max_length=10, verbose_name="Номер кабинета")
 
     class Meta:
         verbose_name = "Пользователь"
