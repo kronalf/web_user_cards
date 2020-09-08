@@ -46,8 +46,11 @@ def from_cyrillic_to_eng(text: str):
         tmp += cyrillic_letters.get(ch, ch)
     return tmp
 
-def pass_genrate():
+def pswd_generate():
     pswd = ''
     for i in range(8):
         pswd += random.choice(chars)
     return pswd
+
+def login_generate(full_name: str):
+    pass
