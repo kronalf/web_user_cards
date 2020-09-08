@@ -20,7 +20,7 @@ class Floor(models.Model):
         verbose_name_plural = "Этажи"
 
     def __str__(self):
-       return self.number
+       return str(self.number)
 
 class Person(models.Model):
     department = models.ForeignKey('Department', on_delete=models.CASCADE, verbose_name="ID Отдел")
@@ -40,4 +40,4 @@ class Person(models.Model):
         verbose_name_plural = "Пользователи"
 
     def __str__(self):
-        return self.full_name
+        return str(self.full_name)
