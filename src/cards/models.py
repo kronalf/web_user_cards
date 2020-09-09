@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Department(models.Model):
@@ -10,7 +11,8 @@ class Department(models.Model):
         verbose_name_plural = "Отделы"
 
     def __str__(self):
-       return self.name
+        return self.name
+
 
 class Floor(models.Model):
     number = models.CharField(max_length=10, unique=True, verbose_name="Номер этажа")
@@ -20,7 +22,8 @@ class Floor(models.Model):
         verbose_name_plural = "Этажи"
 
     def __str__(self):
-       return str(self.number)
+        return str(self.number)
+
 
 class Person(models.Model):
     department = models.ForeignKey('Department', on_delete=models.CASCADE, verbose_name="ID Отдел")
