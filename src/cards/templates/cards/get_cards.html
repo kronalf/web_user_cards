@@ -1,0 +1,12 @@
+{% extends 'base_generic.html' %}
+{% block content %}
+     <hr>
+    {% for obj in object_list %}
+        <p>{{ obj.department }}</p>
+        <p>{{ obj.position }}</p>
+        <p>{{ obj.full_name }}</p>
+        <p>{{ obj.login }}</p>
+        <p>{{ obj.password }}</p>
+        <hr>
+    {% endfor %}
+{% endblock %}
