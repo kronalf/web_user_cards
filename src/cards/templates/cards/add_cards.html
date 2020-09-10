@@ -1,0 +1,63 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Карточка пользователя{% endblock %}
+
+{% block content %}
+
+<form method="post" action="">{% csrf_token %}
+  <div class="form-row">
+    <div class="col-md-4 mb-2">
+      <label for="validationServer01">Фамилия</label>
+      <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Иванов" required>
+      <div class="valid-feedback">
+        Ну как то так :-)
+      </div>
+    </div>
+    <div class="col-md-4 mb-2">
+      <label for="validationServer02">Имя</label>
+      <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Иван" required>
+      <div class="valid-feedback">
+        Ну как то так :-)
+      </div>
+    </div>
+    <div class="col-md-4 mb-2">
+      <label for="validationServer01">Отчество</label>
+      <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Иванович" required>
+      <div class="valid-feedback">
+        Ну как то так :-)
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationServer03">Должность</label>
+      <input type="text" class="form-control is-invalid" id="validationServer03" required>
+      <div class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationServer04">Отдел</label>
+      <select class="custom-select is-invalid" id="validationServer04" required>
+        <option selected disabled value="">Choose...</option>
+        <option>...</option>
+      </select>
+      <div class="invalid-feedback">
+        Please select a valid state.
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationServer05">Номер кабинет</label>
+      <input type="text" class="form-control is-invalid" id="validationServer05" required>
+      <div class="invalid-feedback">
+        Please provide a valid zip.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit">Добавить пользователя</button>
+  </div>
+
+</form>
+
+{% endblock %}

@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
-from cards.views import get_cards
+from cards.views import get_cards, add_cards
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('get_cards/', get_cards),
+    path('add_cards/', add_cards),
 ]
 
 urlpatterns += [
