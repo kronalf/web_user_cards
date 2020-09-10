@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Person, Department
-from .utils import from_cyrillic_to_eng, pswd_generate, login_generate
+from .utils import pswd_generate, login_generate
 
 def get_cards(request):
     qs = Person.objects.all()
@@ -18,5 +18,7 @@ def add_cards(request):
     number_room = qs['number_room']
     password = pswd_generate()
     login = login_generate(last_name, first_name, other_name)
-    print(full_name, login, password)
+    email = login + '@minudo.ru'
+    floor = number_room[0]
+    print(full_name, login, email, password, floor)
     return render(request, 'cards/add_cards.html', {'object_list' : d})
