@@ -1,5 +1,6 @@
+from django.db import DatabaseError
 from django.shortcuts import render
-from .models import Person, Department
+from .models import Person, Department, Floor
 from .utils import pswd_generate, login_generate
 
 def get_cards(request):
@@ -7,23 +8,37 @@ def get_cards(request):
     return render(request, 'cards/get_cards.html', {'object_list' : qs})
 
 def add_cards(request):
+    qs = request.POST
     d = Department.objects.all()
+    person = {}
 
     if request.GET:
         pass
-    if request.POST:
-        qs = request.POST
-        first_name = qs['first_name']
-        last_name = qs['last_name']
-        other_name = qs['other_name']
+    if qs:
+        first_name = qs['first_name'].strip()
+        last_name = qs['last_name'].strip()
+        other_name = qs['other_name'].strip()
         full_name = last_name + ' ' + first_name + ' ' + other_name
-        position = qs['position']
-        department = qs['department']
-        number_room = qs['number_room']
-        password = pswd_generate()
         login = login_generate(last_name, first_name, other_name)
         email = login + '@minudo.ru'
-        floor = number_room[0]
-        print(full_name, login, email, password, floor)
+        department = Department.objects.filter(name=qs['department']).first()
+        floor = Floor.objects.filter(floor=qs['number_room'][0]).first()
+        password = pswd_generate()
+        person = {'first_name':first_name,
+                  'last_name':last_name,
+                  'other_name':other_name,
+                  'full_name':full_name,
+                  'position':qs['position'].strip(),
+                  'department':department,
+                  'number_room':qs['number_room'],
+                  'password':password,
+                  'login':login,
+                  'email':email,
+                  'floor':floor}
+        p = Person(**person)
+        try:
+            p.save()
+        except DatabaseError:
+            pass
 
     return render(request, 'cards/add_cards.html', {'object_list' : d})
