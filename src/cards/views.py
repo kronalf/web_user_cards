@@ -22,7 +22,7 @@ def add_cards(request):
         login = login_generate(last_name, first_name, other_name)
         email = login + '@minudo.ru'
         department = Department.objects.filter(name=qs['department']).first()
-        floor = Floor.objects.filter(floor=qs['number_room'][0]).first()
+        floor = Floor.objects.filter(number=qs['number_room'][0]).first()
         password = pswd_generate()
         person = {'first_name':first_name,
                   'last_name':last_name,
@@ -38,6 +38,8 @@ def add_cards(request):
         p = Person(**person)
         try:
             p.save()
+            return render(request, 'cards/get_cards.html',
+                   {'object_list' : Person.objects.filter(login=login)})
         except DatabaseError:
             pass
 
