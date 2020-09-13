@@ -36,7 +36,7 @@ cyrillic_letters = {
     'я':'ya'
     }
 
-chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyz' \
+chars = '!&$#?@abcdefghijklnopqrstuvwxyz' \
         'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
 
 def from_cyrillic_to_eng(text: str):

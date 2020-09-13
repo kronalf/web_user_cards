@@ -8,30 +8,35 @@ def get_cards(request):
     return render(request, 'cards/get_cards.html', {'object_list' : qs})
 
 def add_cards(request):
-    person = {}
-    d = Department.objects.all()
     qs = request.POST
-    if qs:
+    person = {}
+    password = pswd_generate()
+    d = Department.objects.all()
+
+    if request.GET:
+        pass
+    if request.POST:
         department = Department.objects.filter(name=qs['department']).first()
+        login = login_generate(qs['last_name'].strip(),
+                               qs['first_name'].strip(),
+                               qs['other_name'].strip())
+        email = login + '@minudo.ru'
+        # n = qs['number_room'][0]
         floor = Floor.objects.filter(number=qs['number_room'][0]).first()
-        person = {'first_name' : qs['first_name'],
-                  'last_name' : qs['last_name'],
-                  'other_name' : qs['other_name'],
+        person = {'first_name' : qs['first_name'].strip(),
+                  'last_name' : qs['last_name'].strip(),
+                  'other_name' : qs['other_name'].strip(),
                   'full_name' : qs['last_name'] + ' ' + qs['first_name'] + ' ' + qs['other_name'],
-                  'position' : qs['position'],
-                  'number_room' : qs['number_room'],
-                  'password' : pswd_generate(),
-                  'login' : login_generate(qs['last_name'],
-                                           qs['first_name'],
-                                           qs['other_name']),
-                  'email' : login_generate(qs['last_name'],
-                                           qs['first_name'],
-                                           qs['other_name']) + '@minudo.ru'}
+                  'position' : qs['position'].strip(),
+                  'number_room' : qs['number_room'].strip(),
+                  'password' : password,
+                  'login' : login,
+                  'email' : email}
         p = Person(**person, department=department, floor=floor)
         try:
             p.save()
         except DatabaseError:
             pass
-
+        print(person)
 
     return render(request, 'cards/add_cards.html', {'object_list' : d})
