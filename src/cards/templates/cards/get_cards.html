@@ -1,26 +1,46 @@
 {% extends 'base_generic.html' %}
 
+{% load static %}
+
 {% block title %}Карточка пользователя{% endblock %}
 
 {% block content %}
 
 {% for obj in object_list %}
-    <div class="card mb-3" style="max-width: 70%;">
-      <div class="row no-gutters">
+    <div class="card mb-12" style="max-width: 100%;">
+      <div class="container">
+        <div class="col-md-2">
+          <img src="{% static 'cards/img/logo_minudo.png' %}" class="card-img" alt="Эмблема АО Минудобрения">
+        </div>
         <div class="col-md-4">
-          <img src=".img/logo_minudo.png" class="card-img" alt="Эмблема АО Минудобрения">
           <h6 class="card-title">{{ obj.department }}</h6>
         </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><h6 class="card-title">{{ obj.position }}</h6><p class="card-text">{{ obj.full_name }}</p></li>
-              <li class="list-group-item">Имя пользователя: {{ obj.login }}</li>
-              <li class="list-group-item">Пароль: {{ obj.password }}</li>
-              <li class="list-group-item"><small class="text-muted">Почта: {{ obj.email }}</small></li>
-            </ul>
+
+        <div class="container">
+          <div class="row col-md-12">
+            <div class="col-md-4">
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><h6 class="card-title">Должность:</h6></li>
+                  <li class="list-group-item">Имя пользователя:</li>
+                  <li class="list-group-item">Пароль:</li>
+                  <li class="list-group-item"><small class="text-muted">Почта:</small></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><h6 class="card-title">{{ obj.position }}</h6><p class="card-text">{{ obj.full_name }}</p></li>
+                  <li class="list-group-item">{{ obj.login }}</li>
+                  <li class="list-group-item">{{ obj.password }}</li>
+                  <li class="list-group-item"><small class="text-muted">{{ obj.email }}</small></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
 {% endfor %}
