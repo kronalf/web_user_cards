@@ -9,6 +9,14 @@ def get_cards(request):
     return render(request, 'cards/get_cards.html', {'object_list': qs})
 
 
+def search_cards(request):
+    full_name = request.GET.get('full_name')
+    _filter = {'full_name__contains': full_name}
+    qs = Person.objects.filter(**_filter)
+    return render(request, 'cards/search_cards.html',
+                  {'object_list': qs})
+
+
 def add_cards(request):
     qs = request.POST
     d = Department.objects.all()

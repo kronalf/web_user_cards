@@ -1,0 +1,64 @@
+{% extends 'base_generic.html' %}
+
+{% load static %}
+
+{% block title %}Карточка пользователя{% endblock %}
+
+{% block content %}
+
+{% for obj in object_list %}
+    <div class="card mb-3" style="max-width: 95%;">
+      <div class="row no-gutters">
+
+        <div class="card-header">
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-2">
+                <img src="{% static 'cards/img/logo_minudo.png' %}" class="card-img" alt="Эмблема АО Минудобрения">
+              </div>
+              <div class="col-md-4">
+                <h6 class="card-title">{{ obj.department }}</h6>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="container">
+
+          <div class="row no-gutters">
+
+            <div class="col-md-6">
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><h6 class="card-title">Должность:</h6></li>
+                  <li class="list-group-item">Ф.И.О.:</li>
+                  <li class="list-group-item">Имя пользователя:</li>
+                  <li class="list-group-item">Пароль:</li>
+                  <li class="list-group-item"><small class="text-muted">Почта:</small></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><h6 class="card-title">{{ obj.position }}</h6></li>
+                  <li class="list-group-item">{{ obj.full_name }}</li>
+                  <li class="list-group-item">{{ obj.login }}</li>
+                  <li class="list-group-item">{{ obj.password }}</li>
+                  <li class="list-group-item"><small class="text-muted">{{ obj.email }}</small></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
