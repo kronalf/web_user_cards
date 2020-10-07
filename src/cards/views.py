@@ -5,8 +5,16 @@ from .utils import pswd_generate, login_generate
 
 
 def get_cards(request):
+    full_name = request.GET.get('full_name')
     qs = Person.objects.all()
-    return render(request, 'cards/get_cards.html', {'object_list': qs})
+    if full_name:
+        _filter = {'full_name__contains': full_name}
+        qs = Person.objects.filter(**_filter)
+        return render(request, 'cards/search_cards.html',
+                      {'object_list': qs})
+    else:
+        if qs:
+            return render(request, 'cards/get_cards.html', {'object_list': qs})
 
 
 def search_cards(request):
