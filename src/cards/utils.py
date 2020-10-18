@@ -70,13 +70,6 @@ def file_import(name_file):
             card = line.split(';;')
             card = list(filter(None, card))
             info_dict = {}
-            # info_dict = {'department': '',
-            #              'position': '',
-            #              'full_name': '',
-            #              'password': '',
-            #              'login': '',
-            #              'email': ''
-            #              }
             for user_info in card[1:]:
                 user_info = user_info.split(';')
                 user.append(user_info)

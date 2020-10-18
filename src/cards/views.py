@@ -20,12 +20,12 @@ def get_cards(request):
         else:
             return render(request, 'cards/get_cards.html')
 
-def search_cards(request):
-    full_name = request.GET.get('full_name')
-    _filter = {'full_name__contains': full_name}
-    qs = Person.objects.filter(**_filter)
-    return render(request, 'cards/search_cards.html',
-                  {'object_list': qs})
+# def search_cards(request):
+#     full_name = request.GET.get('full_name')
+#     _filter = {'full_name__contains': full_name}
+#     qs = Person.objects.filter(**_filter)
+#     return render(request, 'cards/search_cards.html',
+#                   {'object_list': qs})
 
 
 def add_cards(request):
@@ -62,14 +62,20 @@ def add_cards(request):
                           {'object_list': Person.objects.filter(login=login)})
         except DatabaseError:
             pass
-
     return render(request, 'cards/add_cards.html', {'object_list': d})
 
+def edit_card(request, full_name):
+    try:
+        card = Person.objects.get(name=full_name).first()
+    except Person.DoesNotExist:
+        pass
+    return render(request, 'cards/get_cards.html',
+                  {'object_list': Person.objects.filter(login=login)})
+
 def load_users(request):
-    # unique_department = []
-    set_department = set()
+    # set_department = set()
     qs = Person.objects.all()
-    list_users = file_import('cards/Persons_final.csv')
+    # list_users = file_import('cards/Persons_final.csv')
 #Блок для импорта Подразделений в модель Department
     # for d in list_users:
     #     set_department.add(d['department'])
@@ -83,32 +89,18 @@ def load_users(request):
     #     except DatabaseError:
     #         pass
 #Блок для импорта Пользователей в модель Person
-    user ={}
-    # user = {'first_name': '',
-    #         'last_name': '',
-    #         'other_name': '',
-    #         'full_name': '',
-    #         'position': '',
-    #         'department': '',
-    #         'number_room': '',
-    #         'password': '',
-    #         'login': '',
-    #         'email': '',
-    #         'floor': Floor.objects.filter(number=1).first()}
-    for lu in list_users:
-        # department = Department.objects.filter(name=lu['department']).first()
-        # if department == None:
-        #     department =  Department.objects.filter(name='Отсутствует').first()
-        user['department'] = Department.objects.filter(name=lu['department']).first()
-        user['full_name'] = lu['full_name']
-        user['position'] = lu['position']
-        user['password'] = lu['password']
-        user['login'] = lu['login']
-        user['email'] = lu['email']
-        user['floor'] = Floor.objects.filter(number=1).first()
-        person = Person(**user)
-        try:
-            person.save()
-        except DatabaseError:
-            print('Error!!!')
-    return render(request, 'cards/load_users.html', {'object_list': qs})
+    # user ={}
+    # for lu in list_users:
+    #     user['department'] = Department.objects.filter(name=lu['department']).first()
+    #     user['full_name'] = lu['full_name']
+    #     user['position'] = lu['position']
+    #     user['password'] = lu['password']
+    #     user['login'] = lu['login']
+    #     user['email'] = lu['email']
+    #     user['floor'] = Floor.objects.filter(number=1).first()
+    #     person = Person(**user)
+    #     try:
+    #         person.save()
+    #     except DatabaseError:
+    #         print('Error!!!')
+    return render(request, 'cards/get_cards.html', {'object_list': qs})
