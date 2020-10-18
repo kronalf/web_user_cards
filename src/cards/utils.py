@@ -1,4 +1,5 @@
 import random
+from .models import Person
 
 cyrillic_letters = {
     'а':'a',
@@ -59,3 +60,40 @@ def login_generate(first_name: str, last_name: str, other_name: str):
     else:
         login += 'x'
     return login
+
+def file_import(name_file):
+    list_user = []
+    user = []
+
+    with open(name_file, 'r') as file:
+        for line in file:
+            card = line.split(';;')
+            card = list(filter(None, card))
+            info_dict = {}
+            # info_dict = {'department': '',
+            #              'position': '',
+            #              'full_name': '',
+            #              'password': '',
+            #              'login': '',
+            #              'email': ''
+            #              }
+            for user_info in card[1:]:
+                user_info = user_info.split(';')
+                user.append(user_info)
+            for info in user:
+                if len(info) < 2:
+                    info.append('')
+                if 'Подразделение' in info:
+                    info_dict['department'] = info[1]
+                elif 'Должность' in info:
+                    info_dict['position'] = info[1]
+                elif 'Ф.И.О.' in info:
+                    info_dict['full_name'] = info[1]
+                elif 'Пароль' in info:
+                    info_dict['password'] = info[1]
+                elif 'Имя для входя в сеть' in info:
+                    info_dict['login'] = info[1]
+                elif 'E-mail' in info:
+                    info_dict['email'] = info[1]
+            list_user.append(info_dict)
+    return list_user

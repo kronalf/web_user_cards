@@ -32,9 +32,7 @@
             <div class="col-md-6">
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  {% if obj.position %}
                   <li class="list-group-item"><h6 class="card-title">Должность:</h6></li>
-                  {% endif %}
                   <li class="list-group-item">Ф.И.О.:</li>
                   <li class="list-group-item">Имя пользователя:</li>
                   <li class="list-group-item">Пароль:</li>
@@ -46,9 +44,7 @@
             <div class="col-md-6">
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  {% if obj.position %}
                   <li class="list-group-item"><h6 class="card-title">{{ obj.position }}</h6></li>
-                  {% endif %}
                   <li class="list-group-item">{{ obj.full_name }}</li>
                   <li class="list-group-item">{{ obj.login }}</li>
                   <li class="list-group-item">{{ obj.password }}</li>
